@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vaultwarden-cert
+  namespace: vaultwarden
+spec:
+  secretName: vaultwarden-tls
+  commonName: <URL_DOMAIN> # Dns name, example: vaultwarden.domain.com
+  dnsNames:
+    - <URL_DOMAIN> # Dns name, example: vaultwarden.domain.com
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer

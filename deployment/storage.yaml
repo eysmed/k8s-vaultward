@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  labels:
+    app: vaultwarden
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: hostpath # Set your SC
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vaultwarden-pv-claim
+  namespace: vaultwarden
+  labels:
+    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/instance: vaultwarden
+spec:
+  storageClassName: hostpath # Set your SC
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi

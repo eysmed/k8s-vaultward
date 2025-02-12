@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: vaultwarden
+secretGenerator:
+  - name: vault-creds
+    literals:
+      - username=admin
+      - password=mypassword
+      - DATABASEURL=mysql://admin:mypassword@vaultwarden-mysql:3306/vaultwarden
+      - admin-token=<token>
+resources:
+  - namespace.yaml
+  - storage.yaml
+  - mysql-deployment.yaml
+  - vaultwarden-deployment.yaml
+  - ssl-cert.yaml
+  - ingress.yaml
